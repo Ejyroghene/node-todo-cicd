@@ -11,7 +11,7 @@ pipeline {
         }
         stage("build and test"){
             steps{
-                sh "docker build -t node-app-test-new ."
+                sh "docker build -t eomojim984/image1 ."
                 echo 'code build bhi ho gaya'
             }
         }
@@ -22,10 +22,10 @@ pipeline {
         }
         stage("push"){
             steps{
-                withCredentials([usernamePassword(credentialsId:"dockerHub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker tag node-app-test-new:latest ${env.dockerHubUser}/node-app-test-new:latest"
-                sh "docker push ${env.dockerHubUser}/node-app-test-new:latest"
+                withCredentials([usernamePassword(credentialsId:"dockerhub",passwordVariable:"dockerhubPass",usernameVariable:"dockerhubUser")]){
+                sh "docker login -u ${env.dockerhubUser} -p ${env.dockerhubPass}"
+                sh "docker tag eomojim984/image1 eomojim984/image1"
+                sh "docker push eomojim984/image1"
                 echo 'image push ho gaya'
                 }
             }
